@@ -5,6 +5,10 @@ import VideoPlayer from "./VideoPlayer.js"
 class App extends React.Component{
   constructor(props){
     super(props);
+    console.log(props);
+    this.state = {
+      currentVideo: props.videoList[0]
+    };
   }
   
   render(){
@@ -18,6 +22,7 @@ class App extends React.Component{
         </nav>
         <div className="row">
           <div className="col-md-7">
+            <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
             <VideoList videoList={this.props.videoList}/>
