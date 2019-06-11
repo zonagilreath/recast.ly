@@ -5,7 +5,7 @@ const VideoList = (props) => {
   return (
     <div className="video-list">
       {props.videoList.map(videoListEntry => 
-          <VideoListEntry video={videoListEntry}/>
+          <VideoListEntry video={videoListEntry} setCurrentVideo={props.setCurrentVideo} />
       )}
     </div>
 )};
