@@ -13,7 +13,12 @@ class Search extends React.Component{
             return;
           }}>
         <div className="search-bar form-inline">
-          <input id="searchBox" className="form-control" type="text" />
+          <input id="searchBox" className="form-control" type="text" onKeyUp={(event)=>{
+            event.preventDefault();
+            const query = document.getElementById('searchBox').value;
+            this.getResults({query:query, key: this.props.key, max:5});
+            return;
+          }} />
           <button className="btn hidden-sm-down" >
             <span className="glyphicon glyphicon-search"></span>
           </button>

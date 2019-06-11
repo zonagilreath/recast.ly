@@ -10,21 +10,30 @@ class App extends React.Component{
     this.state = {
       currentVideo: props.videoList[0],
       videoList: props.videoList,
-      key: YOUTUBE_API_KEY
+      key: YOUTUBE_API_KEY,
+      queryUnlocked: true
     };
   }
   
   getResults(options){
-    searchYouTube({
-      query:options.query,
-      key: YOUTUBE_API_KEY,
-      max: options.max || 5
-    }, this.setResults.bind(this));
+    if (this.state.queryUnlocked){
+      this.setState({
+        queryUnlocked : false
+      });
+      setTimeout(()=>this.setState({
+        queryUnlocked : true
+      }), 500);
+      searchYouTube({
+        query:options.query,
+        key: YOUTUBE_API_KEY,
+        max: options.max || 5
+      }, this.setResults.bind(this));
+    }
   }
   
   setResults(dataList){
     this.setState({
-      videoList: dataList.items
+      videoList: dataList
     })
   }
   
