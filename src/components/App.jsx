@@ -1,14 +1,30 @@
 import Search from "./Search.js"
 import VideoList from "./VideoList.js"
 import VideoPlayer from "./VideoPlayer.js"
+import YOUTUBE_API_KEY from "../config/youtube.js"
+import searchYouTube from "../lib/searchYouTube.js"
 
 class App extends React.Component{
   constructor(props){
     super(props);
-    console.log(props);
     this.state = {
-      currentVideo: props.videoList[0]
+      currentVideo: props.videoList[0],
+      videoList: props.videoList,
     };
+  }
+  
+  getResults(options){
+    searchYouTube({
+      query:options.query,
+      key: YOUTUBE_API_KEY,
+      max: options.max || 5
+    }, this.setResults.bind(this));
+  }
+  
+  setResults(dataList){
+    this.setState({
+      videoList: dataList.items
+    })
   }
   
   setCurrentVideo(video){
@@ -23,7 +39,7 @@ class App extends React.Component{
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search getResults={this.getResults.bind(this)} key={YOUTUBE_API_KEY} />
           </div>
         </nav>
         <div className="row">
@@ -31,7 +47,7 @@ class App extends React.Component{
             <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
-            <VideoList videoList={this.props.videoList} setCurrentVideo={this.setCurrentVideo.bind(this)} />
+            <VideoList videoList={this.state.videoList} setCurrentVideo={this.setCurrentVideo.bind(this)} />
           </div>
         </div>
       </div>
