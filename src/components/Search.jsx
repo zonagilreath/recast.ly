@@ -3,21 +3,22 @@ class Search extends React.Component{
     super(props)
     this.getResults = props.getResults;
   }
-  
-  
     
   render(){
     return (
-      <div className="search-bar form-inline">
-        <input id="searchBox" className="form-control" type="text" />
-        <button className="btn hidden-sm-down" onClick={()=>{
-          const query = document.getElementById('searchBox').value;
-          this.getResults({query:query, key: this.props.key, max:5});
-          return;
-        }}>
-          <span className="glyphicon glyphicon-search"></span>
-        </button>
-      </div> 
+      <form onSubmit={(event)=>{
+            event.preventDefault();
+            const query = document.getElementById('searchBox').value;
+            this.getResults({query:query, key: this.props.key, max:5});
+            return;
+          }}>
+        <div className="search-bar form-inline">
+          <input id="searchBox" className="form-control" type="text" />
+          <button className="btn hidden-sm-down" >
+            <span className="glyphicon glyphicon-search"></span>
+          </button>
+        </div> 
+      </form>
     )
   }
 }

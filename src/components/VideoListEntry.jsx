@@ -1,10 +1,9 @@
 const VideoListEntry = (prop) => {
   const setCurrentVideo = prop.setCurrentVideo;
-  // setCurrentVideo(prop.video)
   return (
   <div className="video-list-entry media">
     <div className="media-left media-middle">
-      <img className="media-object" src={`https://i.ytimg.com/vi/${prop.video.id.videoId}/default.jpg`} alt="" />
+      <img className="media-object" src={`${prop.video.snippet.thumbnails.default.url}`} alt="" />
     </div>
     <div className="media-body">
       <div className="video-list-entry-title" onClick={()=>{setCurrentVideo(prop.video)}}>{prop.video.snippet.title}</div>

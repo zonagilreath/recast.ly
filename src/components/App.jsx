@@ -10,6 +10,7 @@ class App extends React.Component{
     this.state = {
       currentVideo: props.videoList[0],
       videoList: props.videoList,
+      key: YOUTUBE_API_KEY
     };
   }
   
@@ -34,7 +35,6 @@ class App extends React.Component{
   }
   
   render(){
-    console.log(this.props);
     return (
       <div>
         <nav className="navbar">
